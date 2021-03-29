@@ -1,8 +1,12 @@
 package nl.sogeti.com;
 
+import java.util.Random;
+
 public class EasterEgg {
 
     private static final float EGG_EQUATION_SCALE_FACTOR = 1000;
+
+    private static Random RANDOM = new Random();
 
     /**
      * Draws an easter egg through a modified ellipse equation: (x−a)²/rx² + (y−b)²/ry² = 1
@@ -28,7 +32,7 @@ public class EasterEgg {
 
     private static void drawSingleEggPoint(final EggMetrics eggMetrics, int yCoordinate, int xCoordinate) {
         if (isXYPointInsideEgg(eggMetrics, xCoordinate, yCoordinate)) {
-            System.out.print(eggMetrics.getColor());
+            System.out.print(getRandomColor());
         } else {
             System.out.print(eggMetrics.getBackgroundColor());
         }
@@ -57,5 +61,13 @@ public class EasterEgg {
 
     private static int calculateSquareOfRadius(final int radius) {
         return radius * radius;
+    }
+
+    /**
+     * Pick a color at random.
+     * @return
+     */
+    private static String getRandomColor() {
+        return Colors.values()[RANDOM.nextInt(Colors.values().length)].getColor();
     }
 }
